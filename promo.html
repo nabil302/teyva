@@ -1,13 +1,707 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Katalog & Kode Promo</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: #f2f2f2;
+    font-family: 'Segoe UI', 'Nunito', Arial, sans-serif;
+    color: #3c2a21;
+  }
+
+  /* ====================================================== */
+  /* HALAMAN 1: GRID KARTU                                   */
+  /* ====================================================== */
+  #halaman-grid {
+    padding: 30px 0 40px 0;
+    min-height: 100vh;
+  }
+
+  /* ---- Banner Voucher Pengguna Baru (hanya di halaman grid) ---- */
+  .banner-voucher {
+    position: relative;
+    width: 1320px;
+    max-width: 92vw;
+    margin: 0 auto 28px auto;
+    min-height: 150px;
+    background: linear-gradient(120deg, #7a0000 0%, #a30000 55%, #8f0000 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* pita kuning di pojok kiri atas */
+  .banner-voucher::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 62px;
+    background: linear-gradient(135deg, #ffd23f, #ff9d00);
+    clip-path: polygon(0 0, 68% 0, 100% 50%, 68% 100%, 0 100%);
+    z-index: 1;
+  }
+
+  /* segitiga kuning besar di pojok kanan bawah */
+  .banner-voucher::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 150px;
+    height: 100%;
+    background: linear-gradient(135deg, #ffd23f, #ff9d00);
+    clip-path: polygon(100% 0, 100% 100%, 35% 100%);
+    z-index: 1;
+  }
+
+  .panah-bawah-kiri {
+    position: absolute;
+    left: 22px;
+    bottom: 12px;
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    letter-spacing: -2px;
+    z-index: 2;
+  }
+
+  .titik-dekorasi {
+    position: absolute;
+    top: 16px;
+    right: 130px;
+    width: 70px;
+    height: 34px;
+    background-image: radial-gradient(rgba(255,255,255,0.35) 1.5px, transparent 1.5px);
+    background-size: 11px 11px;
+    z-index: 1;
+  }
+
+  .banner-isi {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 70px 18px 90px;
+  }
+
+  .banner-teks-kiri {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+
+  .baris-judul-voucher {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .judul-voucher {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: 1px;
+  }
+
+  .panah-chevron {
+    color: rgba(255,255,255,0.55);
+    font-size: 18px;
+    letter-spacing: -2px;
+  }
+
+  .judul-pengguna-baru {
+    background: linear-gradient(90deg, #ffe066, #ff9800);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 38px;
+    font-weight: 900;
+    margin-top: 2px;
+  }
+
+  .banner-teks-tengah {
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .banner-teks-tengah b {
+    font-weight: 800;
+  }
+
+  .titik-carousel {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  .titik-carousel span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+  }
+
+  .titik-carousel span:nth-child(2) {
+    background: #ffcc00;
+  }
+
+  .banner-kode-kanan {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .banner-kode-kanan .label-kode {
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 1.2;
+    text-align: right;
+  }
+
+  .banner-kode-kanan .kode-first {
+    background: #ffcc00;
+    color: #0d2b52;
+    font-weight: 800;
+    font-size: 17px;
+    padding: 8px 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  .grid-kartu {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 18px;
+    width: 1320px;
+    max-width: 92vw;
+    margin: 0 auto;
+  }
+
+  .kartu-stack {
+    position: relative;
+    width: 100%;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+    padding: 0;
+    font-family: inherit;
+  }
+
+  .kartu-stack::before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: -5px;
+    bottom: -5px;
+    background: #d9d9d9;
+    border-radius: 0 0 24px 24px;
+    z-index: 0;
+  }
+
+  .kartu-atas1 {
+    position: relative;
+    z-index: 2;
+    background-image: url('assets/Screenshot\ 2026-09-03\ 124646.png');
+    border-radius: 24px 24px 0 0;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .kartu-atas2 {
+    position: relative;
+    z-index: 2;
+    background-image: url('assets/Screenshot\ 2026-09-03\ 124715.png');
+    border-radius: 24px 24px 0 0;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .kartu-atas3 {
+    position: relative;
+    z-index: 2;
+    background-image: url('assets/Screenshot\ 2026-09-03\ 124728.png');
+    border-radius: 24px 24px 0 0;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .kartu-atas4 {
+    position: relative;
+    z-index: 2;
+    background-image: url('assets/Screenshot\ 2026-09-03\ 124751.png');
+    border-radius: 24px 24px 0 0;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .kartu-atas5 {
+    position: relative;
+    z-index: 2;
+    background-image: url('assets/Screenshot\ 2026-09-03\ 124816.png');
+    border-radius: 24px 24px 0 0;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .kartu-atas6 {
+    position: relative;
+    z-index: 2;
+    background-image: url('assets/Screenshot\ 2026-09-03\ 123104.png');
+    border-radius: 24px 24px 0 0;
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .tombol-detail {
+    background: #ffffff;
+    color: #3c2a21;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+    white-space: nowrap;
+  }
+
+  .kartu-bawah {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    border-radius: 0 0 24px 24px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .teks-cek {
+    color: #3c2a21;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  /* ====================================================== */
+  /* HALAMAN 2: KODE PROMO                                    */
+  /* ====================================================== */
+  #halaman-promo {
+    display: none;
+    background: #ffffff;
+    min-height: 100vh;
+  }
+
+  .tombol-kembali {
+    display: inline-block;
+    margin: 16px 0 0 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #3c2a21;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+
+  .banner {
+    position: relative;
+    background: #cdbca4;
+    padding: 26px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    min-height: 190px;
+    margin-top: 10px;
+  }
+
+  .banner-kiri {
+    max-width: 60%;
+  }
+
+  .tag-periode {
+    display: inline-block;
+    background: #2c2118;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    margin-bottom: 12px;
+    clip-path: polygon(0 0, 100% 0, 94% 100%, 0% 100%);
+  }
+
+  .judul-banner {
+    font-size: 26px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 16px 0;
+  }
+
+  .badge-voucher {
+    display: inline-flex;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 999px;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .badge-voucher span.label {
+    padding: 8px 16px;
+    color: #3c2a21;
+  }
+
+  .badge-voucher span.kode {
+    background: #c0392b;
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 999px;
+  }
+
+  .banner-kanan {
+    position: relative;
+    width: 260px;
+    height: 160px;
+    flex-shrink: 0;
+  }
+
+  .diskon-lingkaran {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 78px;
+    height: 78px;
+    background: #f4c542;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 12px;
+    color: #2c2118;
+    text-align: center;
+    line-height: 1.1;
+    z-index: 3;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  .diskon-lingkaran .persen {
+    font-size: 18px;
+  }
+
+  .meja {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+    width: 200px;
+    height: 26px;
+    background: #b98a4e;
+    border-radius: 50%;
+  }
+
+  .produk {
+    position: absolute;
+    right: 30px;
+    bottom: 18px;
+    width: 150px;
+    height: 110px;
+    background: #444;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+
+  .tag-persen {
+    position: absolute;
+    background: #d64541;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 26px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+  }
+
+  .tag1 { top: 8px; right: 90px; transform: rotate(-12deg); }
+  .tag2 { top: 24px; right: 60px; transform: rotate(8deg); }
+  .tag3 { top: 4px; right: 30px; transform: rotate(-6deg); }
+
+  .konten {
+    max-width: 620px;
+    margin: 48px auto 0 auto;
+    padding: 32px 24px;
+    border: 1px solid #e2ded9;
+    border-radius: 4px;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.04);
+    text-align: center;
+  }
+
+  .konten h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 24px 0;
+  }
+
+  .kotak-kode {
+    display: inline-block;
+    border: 2px dashed #3c2a21;
+    border-radius: 6px;
+    padding: 12px 40px;
+    cursor: pointer;
+    background: none;
+  }
+
+  .kotak-kode span {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #e0a800;
+  }
+
+  .catatan {
+    margin-top: 12px;
+    font-size: 12px;
+    color: #8a8a8a;
+  }
+
+  .judul-kategori {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    margin: 48px 0 24px 0;
+  }
+
+  .grid-kategori {
+    max-width: 760px;
+    margin: 0 auto 60px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px 16px;
+    padding: 0 24px;
+  }
+
+  .kategori-box {
+    background: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.06);
+    padding: 14px 22px;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  .kategori-box.besar {
+    font-size: 18px;
+    font-weight: 800;
+  }
+
+  #status-salin {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+    color: #2e7d32;
+    height: 16px;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ====================================================== -->
+  <!-- HALAMAN 1: GRID 6 KARTU                                  -->
+  <!-- ====================================================== -->
+  <div id="halaman-grid">
+
+    <div class="banner-voucher">
+      <div class="titik-dekorasi"></div>
+      <div class="panah-bawah-kiri">&raquo;&raquo;&raquo;&raquo;&rsaquo;</div>
+      <div class="banner-isi">
+        <div class="banner-teks-kiri">
+          <div class="baris-judul-voucher">
+            <span class="judul-voucher">VOUCHER</span>
+            <span class="panah-chevron">&raquo;&raquo;&raquo;&raquo;&rsaquo;</span>
+          </div>
+          <span class="judul-pengguna-baru">PENGGUNA BARU</span>
+        </div>
+
+        <div class="banner-teks-tengah">
+          Nikmati <b>DISKON 10%</b><br>untuk Pembelanjaan Pertama
+          <div class="titik-carousel"><span></span><span></span><span></span></div>
+        </div>
+
+        <div class="banner-kode-kanan">
+          <div class="label-kode">Kode<br>Voucher</div>
+          <div class="kode-first">FIRST10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-kartu">
+      
+      <button class="kartu-stack" onclick="bukaPromo(1)">
+        <div class="kartu-atas1"><div class="tombol-detail">Lihat Detail</div></div>
+        <div class="kartu-bawah"><div class="teks-cek">Cek Sekarang</div></div>
+      </button>
+
+      <button class="kartu-stack" onclick="bukaPromo(2)">
+        <div class="kartu-atas2"><div class="tombol-detail">Lihat Detail</div></div>
+        <div class="kartu-bawah"><div class="teks-cek">Cek Sekarang</div></div>
+      </button>
+
+      <button class="kartu-stack" onclick="bukaPromo(3)">
+        <div class="kartu-atas3"><div class="tombol-detail">Lihat Detail</div></div>
+        <div class="kartu-bawah"><div class="teks-cek">Cek Sekarang</div></div>
+      </button>
+
+      <button class="kartu-stack" onclick="bukaPromo(4)">
+        <div class="kartu-atas4"><div class="tombol-detail">Lihat Detail</div></div>
+        <div class="kartu-bawah"><div class="teks-cek">Cek Sekarang</div></div>
+      </button>
+
+      <button class="kartu-stack" onclick="bukaPromo(5)">
+        <div class="kartu-atas5"><div class="tombol-detail">Lihat Detail</div></div>
+        <div class="kartu-bawah"><div class="teks-cek">Cek Sekarang</div></div>
+      </button>
+
+      <button class="kartu-stack" onclick="bukaPromo(6)">
+        <div class="kartu-atas6"><div class="tombol-detail">Lihat Detail</div></div>
+        <div class="kartu-bawah"><div class="teks-cek">Cek Sekarang</div></div>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ====================================================== -->
+  <!-- HALAMAN 2: KODE PROMO (disembunyikan sampai kartu diklik) -->
+  <!-- ====================================================== -->
+  <div id="halaman-promo">
+    <button class="tombol-kembali" onclick="kembaliKeGrid()">&larr; Kembali</button>
+
+    <div class="banner">
+      <div class="banner-kiri">
+        <div class="tag-periode" id="tag-periode">PERIODE 24 - 28 AGUSTUS 2026</div>
+        <div class="judul-banner">Perkakas Tepat, Kerja Hebat<br>Harga Bersahabat</div>
+        <div class="badge-voucher">
+          <span class="label">KODE VOUCHER</span>
+          <span class="kode" id="kode-banner">CAT40</span>
+        </div>
+      </div>
+      <div class="banner-kanan">
+        <div class="diskon-lingkaran">DISKON<span class="persen" id="persen-diskon">10%</span></div>
+        <div class="tag-persen tag1">%</div>
+        <div class="tag-persen tag2">%</div>
+        <div class="tag-persen tag3">%</div>
+        <div class="meja"></div>
+        <div class="produk">🛠️</div>
+      </div>
+    </div>
+
+    <div class="konten">
+      <h2>Gunakan Kode Voucher Ini:</h2>
+      <div class="kotak-kode" onclick="salinKode()">
+        <span id="kode-detail">A93SD</span>
+      </div>
+      <div class="catatan">*Klik kode di atas untuk menyalin.</div>
+      <span id="status-salin"></span>
+    </div>
+
+    <div class="judul-kategori">Pilih Kategori Favoritmu</div>
+
+    <div class="grid-kategori">
+      <div class="kategori-box">Penyejuk Udara, Ventilasi</div>
+      <div class="kategori-box besar">Katup</div>
+      <div class="kategori-box">Kebutuhan Pipa</div>
+      <div class="kategori-box">Perangkat, Sambungan Kabel Listrik</div>
+      <div class="kategori-box besar">Selang</div>
+    </div>
+  </div>
+
+  <script>
+    // data promo berbeda untuk tiap kartu (1..6)
+    const dataPromo = {
+      1: { periode: "PERIODE 24 - 28 AGUSTUS 2026", kodeBanner: "CAT40", kodeDetail: "A93SD", diskon: "10%" },
+      2: { periode: "PERIODE 29 AGUSTUS - 2 SEPTEMBER 2026", kodeBanner: "CAT41", kodeDetail: "B12XQ", diskon: "15%" },
+      3: { periode: "PERIODE 3 - 7 SEPTEMBER 2026", kodeBanner: "CAT42", kodeDetail: "C77TZ", diskon: "20%" },
+      4: { periode: "PERIODE 8 - 12 SEPTEMBER 2026", kodeBanner: "CAT43", kodeDetail: "D45LM", diskon: "12%" },
+      5: { periode: "PERIODE 13 - 17 SEPTEMBER 2026", kodeBanner: "CAT44", kodeDetail: "E88RP", diskon: "18%" },
+      6: { periode: "PERIODE 18 - 22 SEPTEMBER 2026", kodeBanner: "CAT45", kodeDetail: "F23VK", diskon: "25%" }
+    };
+
+    function bukaPromo(id) {
+      const data = dataPromo[id];
+      document.getElementById("tag-periode").textContent = data.periode;
+      document.getElementById("kode-banner").textContent = data.kodeBanner;
+      document.getElementById("kode-detail").textContent = data.kodeDetail;
+      document.getElementById("persen-diskon").textContent = data.diskon;
+
+      document.getElementById("halaman-grid").style.display = "none";
+      document.getElementById("halaman-promo").style.display = "block";
+      window.scrollTo(0, 0);
+    }
+
+    function kembaliKeGrid() {
+      document.getElementById("halaman-promo").style.display = "none";
+      document.getElementById("halaman-grid").style.display = "block";
+      window.scrollTo(0, 0);
+    }
+
+    function salinKode() {
+      const kode = document.getElementById("kode-detail").textContent;
+      navigator.clipboard.writeText(kode).then(() => {
+        const status = document.getElementById("status-salin");
+        status.textContent = "Kode berhasil disalin!";
+        setTimeout(() => { status.textContent = ""; }, 2000);
+      });
+    }
+  </script>
+
+</body>
 </html>
