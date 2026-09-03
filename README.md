@@ -1,2 +1,0 @@
-# teyva
-kerja kerja kerja
