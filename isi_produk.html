@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Renz Store</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #fff;
+    color: #222;
+}
+
+/* ================= HEADER ================= */
+
+header {
+    height: 62px;
+    background: #24150e;
+    color: white;
+
+    display: flex;
+    align-items: center;
+    padding: 0 7%;
+
+    gap: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 170px;
+}
+
+.logo img {
+    width: 38px;
+    height: 38px;
+    object-fit: contain;
+}
+
+.logo h1 {
+    font-family: Georgia, serif;
+    font-size: 23px;
+}
+
+/* Search */
+
+.search {
+    width: 240px;
+    height: 34px;
+
+    background: white;
+    border-radius: 20px;
+
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+}
+
+.search span {
+    color: #111;
+    font-size: 18px;
+}
+
+/* Header menu */
+
+.header-menu {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 14px;
+}
+
+.header-menu div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.login {
+    margin-left: auto;
+
+    background: #f3efc9;
+    color: #17100b;
+
+    padding: 9px 18px;
+    border-radius: 20px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 40px;
+    border-bottom: 1px solid #ddd;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 120px;
+
+    font-size: 14px;
+}
+
+.navbar a {
+    color: #222;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    color: #8a4c27;
+}
+
+/* ================= CONTENT ================= */
+
+.container {
+    width: 85%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* Cart title */
+
+.cart-title {
+    text-align: center;
+    font-size: 29px;
+    font-weight: 400;
+    margin-top: 17px;
+    margin-bottom: 8px;
+}
+
+/* ================= CART ================= */
+
+.cart {
+    min-height: 205px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 30px;
+
+    padding: 10px 8%;
+}
+
+.product-image {
+    width: 120px;
+    height: 100px;
+
+    border: 2px solid #bbb;
+    border-radius: 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.description {
+    font-size: 18px;
+    width: 100px;
+}
+
+/* Cart box */
+
+.cart-info {
+    width: 140px;
+    min-height: 160px;
+
+    padding: 8px;
+
+    border: 1px solid #eee;
+}
+
+.cart-info h4 {
+    font-size: 9px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.stock {
+    display: inline-block;
+
+    background: #35a64a;
+    color: white;
+
+    font-size: 10px;
+    padding: 3px 9px;
+
+    border-radius: 3px;
+
+    margin-bottom: 18px;
+}
+
+.quantity-title {
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.quantity {
+    display: flex;
+    align-items: center;
+}
+
+.quantity button {
+    width: 22px;
+    height: 22px;
+
+    border: 1px solid #ddd;
+    background: white;
+
+    cursor: pointer;
+}
+
+.quantity span {
+    width: 25px;
+    text-align: center;
+    font-size: 12px;
+}
+
+.cart-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.delete {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.price {
+    color: #f21e1e;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.section-title::before,
+.section-title::after {
+    content: "";
+    height: 2px;
+    background: #555;
+    flex: 1;
+}
+
+.section-title h2 {
+    font-size: 25px;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 18px;
+
+    padding: 45px 5% 135px;
+}
+
+.card {
+    height: 235px;
+
+    border: 2px solid #bbb;
+    border-radius: 20px;
+
+    padding: 12px;
+
+    transition: .2s;
+
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+}
+
+.card-image {
+    width: 100%;
+    height: 95px;
+
+    background: #000;
+
+    border-radius: 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.card:first-child .card-image {
+    background: white;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.card h3 {
+    margin-top: 55px;
+
+    text-align: center;
+
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    background: #21130c;
+    color: white;
+
+    min-height: 430px;
+
+    padding: 35px 8%;
+}
+
+.footer-content {
+    display: grid;
+
+    grid-template-columns:
+        1.2fr
+        1fr
+        1.5fr
+        1.2fr;
+
+    gap: 45px;
+}
+
+.footer-column h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.footer-column h4 {
+    font-size: 21px;
+    margin-bottom: 15px;
+}
+
+.footer-column p,
+.footer-column a {
+    display: block;
+
+    color: #eee;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    margin: 8px 0;
+}
+
+.footer-column a:hover {
+    color: #e8dba0;
+}
+
+/* Logo footer */
+
+.footer-logo img {
+    width: 115px;
+    height: 150px;
+
+    object-fit: contain;
+}
+
+/* Social */
+
+.social {
+    display: flex;
+    gap: 15px;
+    font-size: 22px;
+}
+
+/* Contact */
+
+.contact {
+    margin-top: 35px;
+}
+
+/* Newsletter */
+
+.newsletter {
+    margin-top: 55px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 70px;
+}
+
+.newsletter h2 {
+    font-size: 25px;
+    line-height: 1.25;
+    max-width: 330px;
+}
+
+.newsletter input {
+    width: 270px;
+    height: 34px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 20px;
+
+    padding: 0 16px;
+
+    background: #eee9bb;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width: 900px) {
+
+    header {
+        padding: 0 3%;
+        gap: 10px;
+    }
+
+    .header-menu {
+        gap: 10px;
+    }
+
+    .search {
+        width: 180px;
+    }
+
+    .navbar {
+        gap: 40px;
+    }
+
+    .products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+
+    header {
+        height: auto;
+        padding: 12px;
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        min-width: auto;
+    }
+
+    .header-menu {
+        display: none;
+    }
+
+    .search {
+        flex: 1;
+    }
+
+    .navbar {
+        gap: 15px;
+        font-size: 12px;
+        padding: 0 10px;
+    }
+
+    .cart {
+        padding: 10px;
+        gap: 12px;
+    }
+
+    .description {
+        display: none;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        padding-bottom: 70px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+
+    .newsletter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .section-title h2 {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        <!-- Ganti logo.png dengan logo toko kamu -->
+        <img src="logo.png" alt="Logo">
+
+        <h1>Renz Store</h1>
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="">
+
+        <span>⌕</span>
+    </div>
+
+    <div class="header-menu">
+
+        <div>
+            🪙
+            <span>Point</span>
+        </div>
+
+        <div>
+            ☎
+            <span>Hubungi kami</span>
+        </div>
+
+        <div>
+            🛒
+            <span>Keranjang</span>
+        </div>
+
+        <div>
+            ★
+            <span>Wishlist</span>
+        </div>
+
+    </div>
+
+    <div class="login">
+        ◉ Login
+    </div>
+
+</header>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav class="navbar">
+
+    <a href="#">Beranda</a>
+    <a href="#">Kategori</a>
+    <a href="#">Brand</a>
+    <a href="#">Promo</a>
+    <a href="#">Tentang kami</a>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+    <h2 class="cart-title">
+        Keranjang Belanja Anda
+    </h2>
+
+
+    <!-- CART -->
+
+    <section class="cart">
+
+        <div class="product-image">
+
+            <img src="produk1.png" alt="Produk">
+
+        </div>
+
+        <div class="description">
+            deskripsi
+        </div>
+
+
+        <div class="cart-info">
+
+            <h4>
+                Deskripsi Barang
+            </h4>
+
+            <div class="stock">
+                Ready ✓
+            </div>
+
+            <div class="quantity-title">
+                Jumlah :
+            </div>
+
+            <div class="quantity">
+
+                <button onclick="kurang()">−</button>
+
+                <span id="jumlah">1</span>
+
+                <button onclick="tambah()">+</button>
+
+            </div>
+
+            <div class="cart-bottom">
+
+                <span class="delete" onclick="hapusProduk()">
+                    Batalkan
+                </span>
+
+                <span class="price" id="harga">
+                    Rp20.000
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= POPULER ================= -->
+
+    <div class="section-title">
+
+        <h2>
+            Produk Terpopuler
+        </h2>
+
+    </div>
+
+
+    <section class="products">
+
+        <!-- Produk 1 -->
+
+        <div class="card">
+
+            <div class="card-image">
+
+                <img src="produk1.png" alt="Produk">
+
+            </div>
+
+            <h3>
+                deskripsi
+            </h3>
+
+        </div>
+
+
+        <!-- Produk 2 -->
+
+        <div class="card">
+
+            <div class="card-image">
+            </div>
+
+            <h3>
+                deskripsi
+            </h3>
+
+        </div>
+
+
+        <!-- Produk 3 -->
+
+        <div class="card">
+
+            <div class="card-image">
+            </div>
+
+            <h3>
+                deskripsi
+            </h3>
+
+        </div>
+
+
+        <!-- Produk 4 -->
+
+        <div class="card">
+
+            <div class="card-image">
+            </div>
+
+            <h3>
+                deskripsi
+            </h3>
+
+        </div>
+
+
+        <!-- Produk 5 -->
+
+        <div class="card">
+
+            <div class="card-image">
+            </div>
+
+            <h3>
+                deskripsi
+            </h3>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+
+        <!-- STORE -->
+
+        <div class="footer-column">
+
+            <h3>
+                Renz2 Store
+            </h3>
+
+            <div class="footer-logo">
+
+                <img src="logo.png" alt="Logo">
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGASI -->
+
+        <div class="footer-column">
+
+            <h4>
+                Navigasi
+            </h4>
+
+            <a href="#">Beranda</a>
+            <a href="#">Kategori</a>
+            <a href="#">Brand</a>
+            <a href="#">Promo</a>
+            <a href="#">Tentang kami</a>
+
+        </div>
+
+
+        <!-- CUSTOMER -->
+
+        <div class="footer-column">
+
+            <h4>
+                Layanan Pelanggan
+            </h4>
+
+            <a href="#">Syarat & Ketentuan</a>
+            <a href="#">Kebijakan Privasi</a>
+            <a href="#">Kebijakan Pengembalian</a>
+            <a href="#">Bantuan</a>
+            <a href="#">FAQ</a>
+
+        </div>
+
+
+        <!-- SOCIAL -->
+
+        <div class="footer-column">
+
+            <h4>
+                Ikuti Kami
+            </h4>
+
+            <div class="social">
+
+                <span>◎</span>
+                <span>♪</span>
+                <span>𝕏</span>
+                <span>●</span>
+
+            </div>
+
+
+            <div class="contact">
+
+                <h4>
+                    Hubungi Kami
+                </h4>
+
+                <p>
+                    ☎ +62 821-4023-5817
+                </p>
+
+                <p>
+                    ✉ support@renzstore.com
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NEWSLETTER -->
+
+    <div class="newsletter">
+
+        <h2>
+            Dapatkan Penawaran<br>
+            Terbaru dan lebih<br>
+            banyak lagi!
+        </h2>
+
+        <input
+            type="email"
+            placeholder="Masukkan alamat email"
+        >
+
+    </div>
+
+</footer>
+
+
+<script>
+
+/* ================= JUMLAH PRODUK ================= */
+
+let jumlah = 1;
+
+const hargaSatuan = 20000;
+
+function updateHarga() {
+
+    document.getElementById("jumlah").innerText = jumlah;
+
+    const total = jumlah * hargaSatuan;
+
+    document.getElementById("harga").innerText =
+        "Rp" + total.toLocaleString("id-ID");
+}
+
+function tambah() {
+
+    jumlah++;
+
+    updateHarga();
+
+}
+
+function kurang() {
+
+    if (jumlah > 1) {
+
+        jumlah--;
+
+        updateHarga();
+
+    }
+
+}
+
+function hapusProduk() {
+
+    const cart = document.querySelector(".cart");
+
+    cart.innerHTML = `
+        <p style="
+            width:100%;
+            text-align:center;
+            color:#777;
+            font-size:18px;
+        ">
+            Keranjang belanja kosong.
+        </p>
+    `;
+
+}
+
+</script>
+
+</body>
+</html>
