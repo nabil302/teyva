@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+.navbar-brand:hover {
+    color: #D5CEA3;
+    transform: translateX(5px);
+}
+footer {
+    background-color: #1A120B ;
+    color: white;
+    padding: 60px 0 40px;
+    margin-top: 200px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0px;
+    text-align: center;
+}
+
+
+.footer-navigasi h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    color:#D5CEA3;
+    letter-spacing: 0.5px;
+    font-weight :400
+
+}
+.footer-layanan h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+    color:#D5CEA3;
+    letter-spacing: 0.5px;
+    font-weight :400
+
+}
+
+
+
+.footer-navigasi ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-layanan ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+
+.footer-navigasi ul li a {
+    color: #a0aec0;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+.footer-navigasi ul li a:hover {
+    color: #D5CEA3;
+    transform: translateX(5px);
+}
+.footer-layanan ul li a {
+    color: #a0aec0;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.3s, transform 0.2s;
+    display: inline-block;
+}
+
+.footer-layanan ul li a:hover {
+    color: #D5CEA3;
+    transform: translateX(5px);
+}
+@media (min-width: 768px) {
+    .logo {
+        font-size: 22px;
+    }
+    
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        text-align: left;
+    }
+    
+    .footer-info {
+        padding-right: 40px;
+    }
+}
+</style>
+  </head>
+  <body>
+   <nav class="navbar" style="background-color: #3C2A21;" data-bs-theme="light">
+      <div class="container-fluid">
+        <a class="navbar-brand">
+         <img src="assets/logo.png" alt="Bootstrap" width="234" height="75">
+        </a>
+
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+        <a class="navbar-brand" href="bahasa.html">Bahasa</a>
+        <a class="navbar-brand" href="hubungi.html">Hubungi Kami</a>
+        <a class="navbar-brand" href="keranjang.html">keranjang</a>
+        <a class="navbar-brand" href="whishlist.html">whishlist</a>
+        <a class="navbar-brand" href="login.html">login</a>
+      </div>
+    </nav>
+
+    
+    <nav class="navbar" style="background-color: #FFFFFF;" data-bs-theme="light">
+      <div class="container-fluid" px-6>
+        <a class="navbar-brand-2" href="beranda.html" style="font-size: 20px;">Beranda</a>
+        <a class="navbar-brand-2" href="kategori.html" style="font-size: 20px;">Kategori</a>
+        <a class="navbar-brand-2" href="brand.html" style="font-size: 20px;">Brand</a>
+        <a class="navbar-brand-2" href="promo.html" style="font-size: 20px;">Promo</a>
+        <a class="navbar-brand-2" href="tentang.html" style="font-size: 20px;">Tentang Kami</a>
+      </div>
+    </nav>
+   
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-navigasi">
+                    <h3>Navigasi</h3>
+                    <ul>
+                        <li><a href="beranda.html">Beranda</a></li>
+                        <li><a href="kategori.html">Kategori</a></li>
+                        <li><a href="brand.html">Brand</a></li>
+                        <li><a href="promo.html">Promo</a></li>
+                        <li><a href="tentang.html">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="footer-layanan">
+                    <h3>Layanan Kami</h3>
+                    <ul>
+                        <li><a href="index.html">Syarat & Ketentuan</a></li>
+                        <li><a href="visimisi/index.html">Kebijakan Privasi</a></li>
+                        <li><a href="fasilitas/index.html">Kebijakan Pengembalian</a></li>
+                        <li><a href="daftarbuku/index.html">Bantuan</a></li>
+                        <li><a href="mediasosial/index.html">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
